@@ -1,0 +1,22 @@
+{
+  "name": "teammanager",
+  "version": "1.0.0",
+  "description": "using constructors to create a mini RPG game",
+  "main": "players.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahan1986/TeamManager.git"
+  },
+  "author": "Ahan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahan1986/TeamManager/issues"
+  },
+  "homepage": "https://github.com/ahan1986/TeamManager#readme",
+  "dependencies": {
+    "inquirer": "^5.2.0"
+  }
+}
