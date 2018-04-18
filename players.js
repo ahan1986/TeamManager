@@ -33,3 +33,70 @@ function Player(name, position, offense, defense) {
             "\nDefense: " + this.defense + "\n--------");
     };
 }
+
+// arrays used to contain all of our player objects
+var starters = [];
+var subs = [];
+var team = [];
+
+// recursive function which will allow the user to create 5 players and then will print each player's stats afterwards
+var createPlayer = function() {
+  // if the length of the team array is 8 or higher, no more questions will be asked
+  if (starters.length + subs.length < 8) {
+    console.log("\nNEW PLAYER!\n");
+    inquirer.prompt([
+      {
+        name: "name",
+        message: "Player's Name: "
+      }, {
+        name: "position",
+        message: "Player's position: "
+      }, {
+        name: "offense",
+        message: "Player's Offensive Ability: ",
+        validate: function(value) {
+          if (isNaN(value) === false && parseInt(value) > 0 && parseInt(value) <= 10) {
+            return true;
+          }
+          return false;
+        }
+      }, {
+        name: "defense",
+        message: "Player's Defensive Ability: ",
+        validate: function(value) {
+          if (isNaN(value) === false && parseInt(value) > 0 && parseInt(value) <= 10) {
+            return true;
+          }
+          return false;
+        }
+      }
+    ]).then(function(answers) {
+      // runs the constructor and places the new player object into the variable player.
+      // turns the offense and defense variables into integers as well with parseInt
+      var player = new Player(answers.name, answers.position, parseInt(answers.offense), parseInt(answers.defense));
+      // adds a player to the starters array if there are less than five player objects in it.
+      // otherwise adds the newest player object to the subs array
+      if (starters.length < 5) {
+        starters.push(player);
+        team.push(player);
+        console.log(player.name + " added to the starters");
+      }
+      else {
+        subs.push(player);
+        team.push(player);
+        console.log(player.name + " added to the subs");
+      }
+      // runs the createPlayer function once more
+      createPlayer();
+    });
+  }
+  else {
+    // loops through the team array and calls printStats() for each object it contains
+    for (var i = 0; i < team.length; i++) {
+      team[i].printStats();
+    }
+  }
+};
+
+// calls the function createPlayer() to start the code
+createPlayer();
